@@ -1,6 +1,6 @@
 // src\app\productlist2\page.tsx
 "use client";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import Image from "next/image";
 import Footer from "@/components/footer";
@@ -9,32 +9,32 @@ import Link from "next/link";
 import {sanityFetch , ICard } from "@/services/sanityApi";
 // import  {res  , IProduct} from "@/services/sanityApi";
 
-export default function Productv1() {
-  const [products, setProducts] = useState<ICard[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<ICard[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+export default async function Productv1() {
+  // const [products, setProducts] = useState<ICard[]>([]);
+  // const [filteredProducts, setFilteredProducts] = useState<ICard[]>([]);
+  // const [searchTerm, setSearchTerm] = useState("");
 
  
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-     const res = await sanityFetch('*[_type == "product"]');
-     const products=await res
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //    const res = await sanityFetch('*[_type == "product"]');
+  //    const products=await res
 
-      setProducts(products);
-      setFilteredProducts(products);
-    };
-    fetchProducts();
-  },[]);
+  //     setProducts(products);
+  //     setFilteredProducts(products);
+  //   };
+  //   fetchProducts();
+  // },[]);
 
 
-  function filtterProduct(name: string) {
-    setSearchTerm(name);
-    const filtered = products.filter((product) => 
-      product.slug.current.toLowerCase().includes(name.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  }
+  // function filtterProduct(name: string) {
+  //   setSearchTerm(name);
+  //   const filtered = products.filter((product) => 
+  //     product.slug.current.toLowerCase().includes(name.toLowerCase())
+  //   );
+  //   setFilteredProducts(filtered);
+  // }
 
   return (
     <>
@@ -43,18 +43,18 @@ export default function Productv1() {
         className="xsm:w-full 
   md:w-full"
       >
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => {filtterProduct(e.target.value)}} // Update search term
-          style={{
-            padding: "8px",
-            marginBottom: "20px",
-            width: "300px",
-            border: "1px solid #ccd6dd",
-          }}
-        />
+        {/* <input */}
+        {/* //   type="text"
+        //   placeholder="Search products..."
+        //   value={searchTerm}
+        //   onChange={(e) => {filtterProduct(e.target.value)}} // Update search term
+        //   style={{
+        //     padding: "8px",
+        //     marginBottom: "20px",
+        //     width: "300px",
+        //     border: "1px solid #ccd6dd",
+        //   }}
+        // /> */}
         <Image
           src={"/all-product.png"}
           alt="product_pic"
@@ -97,7 +97,7 @@ export default function Productv1() {
       <div className="flex ">
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-4 xl:grid-cols-4 gap-6 ml-6">
-          {filteredProducts.map((product3: ICard, index: number) => (
+          {(await sanityFetch('*[_type == "product"]')).map((product3: ICard, index: number) => (
             <Link
               href={`/productlist/id?name=${product3.slug.current}&image=${product3.image}&category=${product3.category}&price=${product3.price}&description=${product3.description}&features=${product3.features}&dimensions={width=${product3.dimensions.width},height=${product3.dimensions.height},depth=${product3.dimensions.depth}}`}
               key={index}
