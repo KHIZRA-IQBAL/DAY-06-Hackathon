@@ -9,7 +9,7 @@ function CheckoutForm( {amount}:{amount:number}) {
 
   const [clientSecret, setClientSecret] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // Create PaymentIntent on the server

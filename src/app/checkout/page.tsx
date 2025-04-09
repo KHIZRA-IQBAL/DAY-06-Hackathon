@@ -19,7 +19,6 @@ interface ICard{
 const Checkout = () => {
     const route = useRouter()
     const [cardItem, setCardItem] = useState<ICard[]>([]);
-    const [shipDetail,setShipDetail]=useState(false);
     const [shipCost]=useState(0);
     useEffect(() => {
      const data=  localStorage.getItem('card'); 
