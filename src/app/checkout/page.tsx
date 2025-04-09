@@ -3,8 +3,11 @@ import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import Image from 'next/image'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { FaLongArrowAltRight } from 'react-icons/fa'
+import { toast } from 'sonner';
+
 
 interface ICard{
     name: string;
@@ -14,17 +17,33 @@ interface ICard{
 }
 
 const Checkout = () => {
+    const route = useRouter()
     const [cardItem, setCardItem] = useState<ICard[]>([]);
+    const [shipDetail,setShipDetail]=useState(false);
+    const [shipCost]=useState(0);
     useEffect(() => {
      const data=  localStorage.getItem('card'); 
      const cart = data ? JSON.parse(data) : [];
      setCardItem(cart)
     },[])
     
+    const totalAmount = 
+      Number(
+        cardItem.reduce(
+          (acc:number ,  item:ICard)=> acc +  Number(item.price * item.quantity),0
+        )
+      )+Number(shipCost? shipCost :0);
+    
     function handlePayment() {
-       alert('Payment Successful')
-       localStorage.setItem('card',JSON.stringify([]))
-       setCardItem([])
+      //  alert('Payment Successful')
+      //  localStorage.setItem('card',JSON.stringify([]))
+      //  setCardItem([])
+      if(true){
+        route.push(`/payment?amount=${totalAmount}`) 
+      }else{
+        toast.warning('Invalid shipping Details!')
+      }
+
       }
  
 
@@ -59,7 +78,7 @@ const Checkout = () => {
             <p className="pt-2">Beautiful and simple this is <br /> one for the classics</p>
             <p className="pt-2">{`Price: ${item.price}`}</p>
             <p>{`Quantity: ${item.quantity}`}</p>
-            <p>{`Total: ${item.price * item.quantity}`}</p>
+            {/* <p>{totalAmount}</p> */}
           </div>
         </div>
     ))}
