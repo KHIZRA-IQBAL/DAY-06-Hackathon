@@ -137,24 +137,10 @@ export async function productDeleteSanity(updatedProduct: ICard) {
 //   }
 // }
 
-// export interface ICard {
-//   features: any;
-//   dimensions: any;
-//   slug: any;
-//   _id: string;
-//   productName: string;
-//   price: number;
-//   inventory: number;
-//   category: string;
-//   description: string;
-//   image: string;
-//   status: string;
-// }
-
 export interface ICard {
-  features: Record<string, number>;  // Or define a more specific type if possible
-  dimensions: Record<string, number>;  // Or define a more specific type if possible
-  slug: string;
+  features: any;
+  dimensions: any;
+  slug: any;
   _id: string;
   productName: string;
   price: number;
@@ -164,7 +150,6 @@ export interface ICard {
   image: string;
   status: string;
 }
-
 
 export async function sanityFetch(query: string) {
   const res: ICard[] = await client.fetch(`${query}{
