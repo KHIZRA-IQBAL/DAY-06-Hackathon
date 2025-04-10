@@ -17,7 +17,8 @@ export async function POST(req: NextRequest){
 
     console.log("✅",paymentIntent);
     
-    return NextResponse.json({clientSecret: paymentIntent.client_secret,
+    return NextResponse.json({
+        clientSecret: paymentIntent.client_secret,
         paymentId:paymentIntent.id,
         amount:paymentIntent.amount,
         created:paymentIntent.created

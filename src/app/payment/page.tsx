@@ -4,7 +4,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { useSearchParams } from "next/navigation";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 function Paymentpage() {
     const searchParam = useSearchParams()
@@ -19,3 +19,4 @@ function Paymentpage() {
 }
 
 export default Paymentpage
+
