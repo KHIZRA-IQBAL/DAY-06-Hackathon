@@ -152,8 +152,8 @@ export async function productDeleteSanity(updatedProduct: ICard) {
 // }
 
 export interface ICard {
-  features: Record<string, any>;  // Or define a more specific type if possible
-  dimensions: Record<string, any>;  // Or define a more specific type if possible
+  features: Record<string, number>;  // Or define a more specific type if possible
+  dimensions: Record<string, number>;  // Or define a more specific type if possible
   slug: string;
   _id: string;
   productName: string;

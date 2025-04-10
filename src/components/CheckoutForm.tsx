@@ -29,7 +29,7 @@ function CheckoutForm( {amount}:{amount:number}) {
           }));
         }
       });
-  }, []);
+  }, [amount]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
